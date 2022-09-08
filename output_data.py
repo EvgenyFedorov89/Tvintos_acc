@@ -70,7 +70,7 @@ def write_pressing(date, pressing):
         part_mass_query = """SELECT part_mass FROM parts WHERE part_name = ?"""
         cursor.execute(part_mass_query, (part,)) 
         part_mass = cursor.fetchone()
-        mixture_consumption = part_mass[0] * pressing[part]
+        mixture_consumption = part_mass[0] * pressing[part] / 1000
         
         # Определение марки смеси
         mixture_name_query = """SELECT mixture_name FROM parts WHERE part_name = ?"""

@@ -1,6 +1,5 @@
 # Модуль содержит функции ввода данных пользователем
 
-import sqlite3
 from datetime import datetime
 
 

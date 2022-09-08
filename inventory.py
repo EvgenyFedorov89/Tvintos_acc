@@ -1,10 +1,11 @@
 # Модуль содержит функции инвентаризации материалов
 
 import sqlite3
+import input_data
 
 # Ввод данных по инвентаризации
-def inventory_input():
-    inventory_date = input('Введите дату инвентаризации: ')
+def inventory_results_input():
+    inventory_date = input_data.date_input('Введите дату инвентаризации в формате дд.мм.гггг: ')
     WC = float(input('Количество WC, кг. '))
     Co = float(input('Количество Co, кг. '))
     Cr3C2 = float(input('Количество Cr3C2, кг. '))
@@ -26,8 +27,8 @@ def inventory_input():
 
 
 # Запись данных инвентаризации порошков в базу
-def to_inventory():
-    inventory_date, powders, parts = inventory_input()
+def to_inventory_tables():
+    inventory_date, powders, parts = inventory_results_input()
     conn = sqlite3.connect('accounting.db')
     cursor = conn.cursor()
     
