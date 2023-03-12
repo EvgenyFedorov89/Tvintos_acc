@@ -1,4 +1,5 @@
-acc.db
-accounting — копия.db
 __pycache__
-Описание работы программы.docx
+*.db
+*.rar
+*.pdf
+*.docx
