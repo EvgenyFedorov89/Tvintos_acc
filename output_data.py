@@ -1,23 +1,21 @@
 # Модуль содержит функции записи данных в базу
 
 import sqlite3
+from database import Database
 
+db = Database()
 
 # Добавление данных в таблицу "from_warehouse" (количество принятых со склада за день компонентов)
 def write_from_warehouse(date, WC, Co, Cr3C2):
-    conn = sqlite3.connect('accounting.db')
-    cursor = conn.cursor()
     query = """INSERT INTO from_warehouse
                           (date, component_name, mass)
                           VALUES (?, ?, ?);"""
     data_tuple = (date, 'WC', WC)
-    cursor.execute(query, data_tuple)
+    db.add_entry(query,data_tuple)
     data_tuple = (date, 'Co', Co)
-    cursor.execute(query, data_tuple)
+    db.add_entry(query,data_tuple)
     data_tuple = (date, 'Cr3C2', Cr3C2)
-    cursor.execute(query, data_tuple)
-    conn.commit()
-    cursor.close() 
+    db.add_entry(query,data_tuple)
 
 
 # Добавление данных в таблицу "components" (количество израсходованных за день компонентов)
