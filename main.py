@@ -11,7 +11,7 @@ TV04_composition = {'WC': 0.893, 'Co': 0.1, 'Cr3C2': 0.007}
 TV05_composition = {'WC': 0.913, 'Co': 0.08, 'Cr3C2': 0.007}
 
 
-# Вызов функций ввода данных и сохранение их результатов в переменные
+## Вызов функций ввода данных и сохранение их результатов в переменные
 date = input_data.date_input('Введите дату: ')          # Дата внесения данных (str)
 components_got = input_data.from_warehouse_input()      
 WC = components_got['WC']                               # Количество WC, принятого со склада (float)
@@ -35,4 +35,3 @@ output_data.write_warehouse(date, to_warehouse)         # Вносим кол-в
 
 # Вызов функции инвентаризации
 inventory.to_inventory_tables()
-

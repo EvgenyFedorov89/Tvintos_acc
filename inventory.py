@@ -2,6 +2,10 @@
 
 import sqlite3
 import input_data
+from database import Database
+
+db = Database()
+
 
 # Ввод данных по инвентаризации
 def inventory_results_input():
@@ -29,32 +33,27 @@ def inventory_results_input():
 # Запись данных инвентаризации порошков в базу
 def to_inventory_tables():
     inventory_date, powders, parts = inventory_results_input()
-    conn = sqlite3.connect('accounting.db')
-    cursor = conn.cursor()
-    
+
     # Удаление данных предыдущей инвентаризации по порошкам 
     query = """DELETE FROM inventory_powders"""
-    cursor.execute(query)
+    db.add_entry(query, ())
 
     # Удаление данных предыдущей инвентаризации по деталям 
     query = """DELETE FROM inventory_parts"""
-    cursor.execute(query)
+    db.add_entry(query, ())
 
     # Запись данных в базу "inventory_powders"
     query = """INSERT INTO inventory_powders
                           (date, powder_name, mass)
                           VALUES (?, ?, ?);"""
-    for p in powders:
-        data_tuple = (inventory_date, p, powders[p])
-        cursor.execute(query, data_tuple)
+    for powder in powders:
+        data_tuple = (inventory_date, powder, powders[powder])
+        db.add_entry(query, data_tuple)
     
     # Запись данных в базу "inventory_parts"    
     query = """INSERT INTO inventory_parts
                               (date, part_name, number)
                               VALUES (?, ?, ?);"""
-    for p in parts:
-        data_tuple = (inventory_date, p, parts[p])
-        cursor.execute(query, data_tuple)
-    
-    conn.commit()
-    cursor.close()
+    for part in parts:
+        data_tuple = (inventory_date, part, parts[part])
+        db.add_entry(query, data_tuple)
